@@ -1,6 +1,6 @@
 {
   "name": "@builtwithjavascript/server-side-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Hook useServerSideConfig to more easily load json files with strongly typed configuration models for use in Nuxt, Next, Node, etc on the server side",
   "author": "Damiano Fusco",
   "license": "MIT",
@@ -18,8 +18,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build-types": "tsc src/main.ts --declaration --emitDeclarationOnly --outDir dist",
-    "build": "tsc && vite build && npm run build-types",
+    "build-types": "tsc src/main.ts --esModuleInterop --declaration --emitDeclarationOnly --outDir dist",
+    "build": "tsc --esModuleInterop && vite build && npm run build-types",
     "pub": "npm publish --access public",
     "test": "vitest run",
     "test-watch": "vitest watch",
