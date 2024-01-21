@@ -15,6 +15,8 @@ Contains hooks:
 
 ## How to use
 
+### IMPORTANT: this node should not be installed globally as it will not work that way
+
 ### install:
 ```
 npm i -D @builtwithjavascript/server-side-config

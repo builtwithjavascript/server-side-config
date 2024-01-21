@@ -9,7 +9,7 @@ export const useServerSideConfig = <T>(
     configKey = 'app1'
   }
   
-  const configFilePath = `../../../${ configFilesDirectoryPath }/${ configKey }.json`
+  const configFilePath = `${ !process?.env?.TESTING ? '../../../' : ''}${ configFilesDirectoryPath }/${ configKey }.json`
   const fullPath = configFilePath
 
   let config!: T
