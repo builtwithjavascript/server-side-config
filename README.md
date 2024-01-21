@@ -58,9 +58,12 @@ import type { IConfig } from './your-path-to-your-iconfig-model'
 // then load the server-side config file using the useServerSideConfig and passing the app key, in this case 'app1'
 const instance = useServerSideConfig<IConfig>('app1')
 
+// Note: usually you will read the value of 'app1' from an environment variable, i.e.
+const instance = useServerSideConfig<IConfig>(process.env.SITE_KEY)
+
 // the default base directory for your json files is /config/config-files/ 
 // but you could optionally specify a different path by passing this as the second arugment:
 const configFilesDirectoryPath = `../my-config-files/`
-const instance = useServerSideConfig<IConfig>('app1', configFilesDirectoryPath)
+const instance = useServerSideConfig<IConfig>(process.env.SITE_KEY, configFilesDirectoryPath)
 
 ```

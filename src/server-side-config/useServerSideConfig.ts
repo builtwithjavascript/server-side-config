@@ -1,4 +1,5 @@
 // file: src/server-side-config/useServerSideConfig.ts
+import path from 'path'
 
 export const useServerSideConfig = <T>(
   siteKey: string | undefined,
@@ -9,15 +10,17 @@ export const useServerSideConfig = <T>(
   if (configKey.length < 1) {
     configKey = 'app1'
   }
-  const configFilePath = `${configFilesDirectoryPath}/${configKey}.json`
+  
+  const configFilePath = `${ configFilesDirectoryPath }/${ configKey }.json`
+  const fullPath = path.join(__dirname, configFilePath)
 
   let config!: T
   try {
     // @ts-ignore
-    config = require(configFilePath)
+    config = require(fullPath)
   } catch (e) {
     let errMessage = `useServerSideConfig: 
-      could not load config at path: "${configFilePath}", 
+      could not load config at path: "${fullPath}", 
       or you are not running this code on a server`
     console.warn(errMessage)
     throw new Error(errMessage)
