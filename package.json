@@ -1,0 +1,64 @@
+{
+  "name": "@builtwithjavascript/server-side-config",
+  "version": "1.0.0",
+  "description": "Hook useServerSideConfig to more easily load json files with strongly typed configuration models for use in Nuxt, Next, Node, etc on the server side",
+  "author": "Damiano Fusco",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/builtwithjavascript/server-side-config.git"
+  },
+  "bugs": {
+    "url": "https://github.com/builtwithjavascript/server-side-config/issues"
+  },
+  "homepage": "https://github.com/builtwithjavascript/server-side-config#readme",
+  "keywords": [
+    "config, configuration, server side, server-side, large scale apps, nuxt, next, node"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build-types": "tsc src/main.ts --declaration --emitDeclarationOnly --outDir dist",
+    "build": "tsc && vite build && npm run build-types",
+    "pub": "npm publish --access public",
+    "test": "vitest run",
+    "test-watch": "vitest watch",
+    "pretty": "prettier -w \"./src/**/*.ts\"",
+    "version-patch": "npm version patch -m \"Patch version\"",
+    "preversion": "npm run test",
+    "version": "npm run build",
+    "postversion": "git push"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged \"./src/**/*.ts\""
+    }
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.11.5",
+    "husky": "^8.0.3",
+    "jsdom": "^24.0.0",
+    "prettier": "^3.2.4",
+    "pretty-quick": "^4.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12",
+    "vitest": "^1.2.1"
+  },
+  "files": [
+    "dist"
+  ],
+  "types": "dist/server-side-config/index.d.ts",
+  "main": "dist/server-side-config.umd.js",
+  "module": "dist/server-side-config.es.js",
+  "exports": {
+    ".": {
+      "import": [
+        "./dist/server-side-config.es.js"
+      ],
+      "require": "./dist/server-side-config.umd.js"
+    },
+    "./package.json": "./package.json"
+  }
+}

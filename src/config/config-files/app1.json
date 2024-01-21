@@ -1,0 +1,11 @@
+{
+  "name": "for-unit-tests-only",
+  "marketing": {
+    "title": "For unit-tests only",
+    "hero": "An example for the config file."
+  },
+  "meta": {
+    "title":  "For unit-tests only",
+    "description": "An example for the config file."
+  }
+}
