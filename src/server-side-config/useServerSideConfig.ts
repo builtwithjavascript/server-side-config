@@ -1,6 +1,4 @@
 // file: src/server-side-config/useServerSideConfig.ts
-import path from 'path'
-
 export const useServerSideConfig = <T>(
   siteKey: string | undefined,
   configFilesDirectoryPath: string = '../config/config-files'
@@ -11,8 +9,8 @@ export const useServerSideConfig = <T>(
     configKey = 'app1'
   }
   
-  const configFilePath = `${ configFilesDirectoryPath }/${ configKey }.json`
-  const fullPath = path.join(__dirname, configFilePath)
+  const configFilePath = `../../../${ configFilesDirectoryPath }/${ configKey }.json`
+  const fullPath = configFilePath
 
   let config!: T
   try {
