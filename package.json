@@ -1,6 +1,6 @@
 {
   "name": "@builtwithjavascript/server-side-config",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Hook useServerSideConfig to more easily load json files with strongly typed configuration models for use in Nuxt, Next, Node, etc on the server side",
   "author": "Damiano Fusco",
   "license": "MIT",
@@ -17,34 +17,26 @@
     "config, configuration, server side, server-side, large scale apps, nuxt, next, node"
   ],
   "scripts": {
-    "dev": "vite",
     "build-types": "tsc src/main.ts --esModuleInterop --declaration --emitDeclarationOnly --outDir dist",
     "build": "tsc --esModuleInterop && vite build && npm run build-types",
     "pub": "npm publish --access public",
-    "test": "TESTING=true vitest run",
-    "test-watch": "TESTING=true vitest watch",
-    "pretty": "prettier -w \"./src/**/*.ts\"",
+    "test": "TESTING=true npx vitest run",
+    "test-watch": "TESTING=true npx vitest watch",
+    "pretty": "npx prettier -w \"./src/**/*.ts\"",
     "version-patch": "npm version patch -m \"Patch version\"",
     "preversion": "npm run test",
     "version": "npm run build",
     "postversion": "git push"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged \"./src/**/*.ts\""
-    }
-  },
   "devDependencies": {
-    "@types/jest": "^29.5.11",
-    "@types/node": "^20.11.5",
-    "husky": "^8.0.3",
-    "jsdom": "^24.0.0",
-    "prettier": "^3.2.4",
-    "pretty-quick": "^4.0.0",
+    "@types/jest": "^29.5.13",
+    "@types/node": "^22.5.5",
+    "jsdom": "^25.0.0",
+    "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.12",
-    "vitest": "^1.2.1"
+    "typescript": "^5.6.2",
+    "vite": "^5.4.6",
+    "vitest": "^2.1.1"
   },
   "files": [
     "dist"

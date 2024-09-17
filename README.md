@@ -69,3 +69,6 @@ const configFilesDirectoryPath = `../my-config-files/`
 const instance = useServerSideConfig<IConfig>(process.env.SITE_KEY, configFilesDirectoryPath)
 
 ```
+
+# Dev dependencies:
+@types/jest @types/node jsdom prettier ts-node typescript vite vitest
