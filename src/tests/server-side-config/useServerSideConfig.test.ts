@@ -13,10 +13,10 @@ interface IConfig {
 }
 
 describe('useServerSideConfig', () => {
-  const absoluteConfigFilesDirectoryPath = `src/tests/sample-config-files`
+  const configFilesDirectoryPath = `src/tests/sample-config-files`
 
   it(`should return an instance of the config correctly when appKey argument is correct`, () => {
-    const instance = useServerSideConfig<IConfig>('app1', absoluteConfigFilesDirectoryPath)
+    const instance = useServerSideConfig<IConfig>('app1', configFilesDirectoryPath)
     expect(instance).toBeDefined()
     expect(instance.name).toEqual('for-unit-tests-only')
   })

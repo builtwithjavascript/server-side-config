@@ -1,75 +1,103 @@
-# server-side-config
-Hook useServerSideConfig to more easily load json files with strongly typed configuration models for use in Nuxt, Next, Node, etc on the server side
-
 # @builtwithjavascript/server-side-config
-Hook useServerSideConfig to more easily load json files with strongly typed configuration models for use in Nuxt, Next, Node, etc on the server side
 
 [![npm version](https://badge.fury.io/js/@builtwithjavascript%2Fserver-side-config.svg)](https://badge.fury.io/js/@builtwithjavascript%2Fserver-side-config)
 
-## code base
+Hook `useServerSideConfig` to more easily load JSON files with strongly typed configuration models for use in Node.js environments (including frameworks like Nuxt, Next.js, etc.) on the server side.
+
+## Codebase
 TypeScript
 
 ## Description
-Contains hooks:
-- useServerSideConfig
+This package provides a single hook:
+- `useServerSideConfig`
 
 ## How to use
 
-### IMPORTANT: this node should not be installed globally as it will not work that way
+### IMPORTANT: This package should be installed as a local dependency (not globally) as it is designed for project-specific server-side configuration loading.
 
-### install:
-```
+### Installation:
+```bash
 npm i -D @builtwithjavascript/server-side-config
 ```
 
-### consume:
-```
-// create the TypeScript interface that will define the structure of your config file
-// and save it under your model or other directory ('./your-path-to-your-iconfig-model'):
-// for example: 
-interface IConfig {
-  name: string,
-  marketing: {
-    title: string
-    hero: string
-  },
-  meta: {
-    title: string
-    description: string
-  }
-}
 
-// create a json file named app1.json that adheres to the above interface and save it 
-// under a directory on your project (by default the hook will look into ./config/config-files/):
-{
-  "name": "for-unit-tests-only",
-  "marketing": {
-    "title": "For unit-tests only",
-    "hero": "An example for the config file."
-  },
-  "meta": {
-    "title":  "For unit-tests only",
-    "description": "An example for the config file."
-  }
-}
 
-// in the code where you need to consume the server-side config file (i.e. in Nuxt this would be in nuxt.config.ts), import a reference to the useServerSideConfig hook and your IConfig interface:
-import { useServerSideConfig } from '@/server-side-config/'
-import type { IConfig } from './your-path-to-your-iconfig-model'
+### Consumption:
 
-// then load the server-side config file using the useServerSideConfig and passing the app key, in this case 'app1'
-const instance = useServerSideConfig<IConfig>('app1')
+1. **Define your Configuration Model:** Create a TypeScript interface that defines the structure of your configuration file. Save it in your models directory or a suitable location (e.g., `./your-path-to-your-iconfig-model.ts`):
 
-// Note: usually you will read the value of 'app1' from an environment variable, i.e. process.env.SITE_KEY
+   TypeScript
 
-// Also need the absoluteConfigFilesDirectoryPath for which you *must* provide the absolute path or a path relative to process.cwd()
-// e.g., '/path/to/my/nuxt/app/config/config-files'
-// or 'config/config-files' if run from project root
+   ```
+   // your-path-to-your-iconfig-model.ts
+   interface IConfig {
+     name: string,
+     marketing: {
+       title: string
+       hero: string
+     },
+     meta: {
+       title: string
+       description: string
+     }
+   }
+   ```
 
-const absoluteConfigFilesDirectoryPath = `config/config-files/`
-const instance = useServerSideConfig<IConfig>(process.env.SITE_KEY, absoluteConfigFilesDirectoryPath)
+2. **Create your JSON Configuration File:** Create a JSON file (e.g., `app1.json`) that adheres to your defined interface. By default, `useServerSideConfig` will look for config files within a directory you specify. A common convention is `config/config-files/`.
 
-```
+   Example `app1.json`:
 
-# Dev dependencies:
-@types/jest @types/node jsdom prettier ts-node typescript vite vitest
+   JSON
+
+   ```
+   {
+     "name": "for-development",
+     "marketing": {
+       "title": "My Awesome App",
+       "hero": "The best app ever!"
+     },
+     "meta": {
+       "title":  "My App Title",
+       "description": "A description of my awesome app."
+     }
+   }
+   ```
+
+3. **Integrate and Load the Configuration:** In your server-side code (e.g., `nuxt.config.ts`, API routes, Node.js server scripts), import the `useServerSideConfig` hook and your `IConfig` interface.
+
+   **Crucially, you must provide the `configFilesDirectoryPath` argument.** This path should be **relative to the root of your project** (where your `package.json` resides, and where your Node.js process is typically started, i.e., `process.cwd()`).
+
+   TypeScript
+
+   ```
+   import { useServerSideConfig } from '@builtwithjavascript/server-side-config'
+   import type { IConfig } from './your-path-to-your-iconfig-model' // Adjust this path to your model
+   
+   // Example 1: Using a hardcoded app key (for specific scenarios or testing)
+   const config = useServerSideConfig<IConfig>('app1', 'config/config-files');
+   console.log(config.name); // Output: "for-development"
+   
+   // Example 2: Using an environment variable for the app key (recommended for dynamic environments)
+   // Assuming your config files are in 'config/config-files/' relative to your project root
+   const configFilesDir = 'config/config-files';
+   
+   // In Nuxt, this might be used in nuxt.config.ts for server-side operations
+   // or in server/api routes.
+   const instance = useServerSideConfig<IConfig>(process.env.SITE_KEY, configFilesDir);
+   
+   // Note: The `configFilesDir` parameter MUST be a path that `fs.readFileSync` can resolve
+   // relative to the current working directory (`process.cwd()`) of your running Node.js process.
+   // For most Nuxt/Next.js/Node projects, 'config/config-files' will be correct if your
+   // config files are directly within a 'config/config-files' folder at your project root.
+   ```
+
+## Development Dependencies:
+
+- `@types/jest`
+- `@types/node`
+- `jsdom`
+- `prettier`
+- `ts-node`
+- `typescript`
+- `vite`
+- `vitest`
