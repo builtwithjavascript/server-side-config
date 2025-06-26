@@ -1,4 +1,5 @@
 // file: src/server-side-config/useServerSideConfig.ts
+// @ts-ignore
 import fs from 'fs'
 
 export const useServerSideConfig = <T>(
