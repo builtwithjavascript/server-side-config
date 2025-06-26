@@ -1,4 +1,6 @@
 // file: src/server-side-config/useServerSideConfig.ts
+import fs from 'fs'
+
 export const useServerSideConfig = <T>(
   siteKey: string | undefined,
   configFilesDirectoryPath: string = '../config/config-files'
@@ -11,6 +13,7 @@ export const useServerSideConfig = <T>(
 
   const configFilePath = `${!process?.env?.TESTING ? '../../../' : ''}${configFilesDirectoryPath}/${configKey}.json`
   const fullPath = configFilePath
+  console.log('use-serverside-config: path exist', fs.existsSync(`${__dirname}${fullPath}`), `${__dirname}${fullPath}`)
 
   let config!: T
   try {
