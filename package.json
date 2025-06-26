@@ -1,6 +1,6 @@
 {
   "name": "@builtwithjavascript/server-side-config",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Hook useServerSideConfig to more easily load json files with strongly typed configuration models for use in Nuxt, Next, Node, etc on the server side",
   "author": "Damiano Fusco",
   "license": "MIT",

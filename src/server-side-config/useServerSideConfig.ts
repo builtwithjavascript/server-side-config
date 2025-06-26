@@ -13,7 +13,6 @@ export const useServerSideConfig = <T>(
 
   const configFilePath = `${!process?.env?.TESTING ? '../../../' : ''}${configFilesDirectoryPath}/${configKey}.json`
   const fullPath = configFilePath
-  console.log('use-serverside-config: path exist', fs.existsSync(`${__dirname}${fullPath}`), `${__dirname}${fullPath}`)
 
   let config!: T
   try {
